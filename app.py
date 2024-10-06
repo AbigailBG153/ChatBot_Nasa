@@ -23,6 +23,10 @@ def get_meteomatics_data(lat: float, lon: float, params: str):
     else:
         raise HTTPException(status_code=response.status_code, detail="Error al obtener datos de Meteomatics")
 
+@app.get("/")
+def read_root():
+    return {"message": "Bienvenido a la API de FastAPI"}
+
 # Endpoint para obtener la temperatura en JSON
 @app.get("/weather/temperature")
 def get_temperature(lat: float, lon: float):
