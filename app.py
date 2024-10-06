@@ -1,6 +1,9 @@
 from fastapi import FastAPI, HTTPException
 import requests
 from datetime import datetime
+from fastapi.middleware.cors import CORSMiddleware
+
+
 
 # Credenciales de la API de Meteomatics
 username = 'gonzalesastoray_andreaabigail'
@@ -10,6 +13,15 @@ password = '6DEsh48vL8'
 base_url = f'https://{username}:{password}@api.meteomatics.com'
 
 app = FastAPI()
+
+# Configurar CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Permitir todas las fuentes
+    allow_credentials=True,
+    allow_methods=["*"],  # Permitir todos los métodos (GET, POST, etc.)
+    allow_headers=["*"],  # Permitir todos los headers
+)
 
 # Función para obtener datos de la API de Meteomatics
 def get_meteomatics_data(lat: float, lon: float, params: str):
